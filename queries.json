@@ -1,0 +1,17 @@
+{
+  "easy" : [
+    "pizza",
+    "pasta", 
+    "chocolate cookies"
+  ],
+  "medium" : [
+    "Salad, Ingredients: onion, tomato",
+    "vegetable soup",
+    "How to make candies with peanut butter."
+  ],
+  "hard" : [
+    "bird without bones",
+    "no rice", 
+    "cheese topping"
+  ]
+}
