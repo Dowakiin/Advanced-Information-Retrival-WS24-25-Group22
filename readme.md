@@ -32,10 +32,30 @@ The _Bert_ model is also from Hugging Face: [alexdseo/RecipeBERT](https://huggin
 - [Design Document](Design/AirDesignDocumentGroup22.pdf)
 - Evaluation (as [.pdf](Evaluation/Evaluation.pdf) and [.csv](Evaluation/Evaluation.csv); or online as [google doc](https://docs.google.com/spreadsheets/d/12DoSQCYWASj7j5J2dj4g4nOa0l75Q9l1k2vbwn6Z5d0/edit?usp=sharing))
 - [Report](Report_Group_22.pdf)
-- [Presentation Slides]() TODO
+- [Presentation Slides](AIRPresentation.pdf)
 
 ### Abstract
 ___
+This project investigates the use of traditional and advanced information retrieval (IR) methods for recipe retrieval, using TF-IDF, Word2Vec, and Bert. 
+With the rise of recipe-sharing platforms, finding recipes tailored to individual tastes, preferences, and cooking skills has become increasingly challenging. 
+Our goal is to evaluate how effectively these methods handle different queries of varying difficulty and assess their suitability for this search task.
+
+##### Methods
+- TF-IDF: A lightweight, context-unaware method effective for simple queries.
+- Word2Vec: Captures semantic relationships but struggled with harder queries in this domain.
+- Bert: A transformer-based model delivering the best performance, especially for complex queries.
+- Dataset: A subset of the RecipeNLG dataset, consisting of 100,000 recipes, preprocessed for cosine similarity.
+- Evaluation: Queries of varying difficulty (easy, medium, hard) were tested, and results were evaluated by four independent evaluators.
+
+##### Results
+- TF-IDF: Performed well on simple queries but struggled with complex ones due to lack of context-awareness.
+- Word2Vec: Underperformed expectations, thus further investigation into its suitability for recipe retrieval is needed.
+- Bert: Delivered the highest accuracy overall, excelling at medium and hard queries thanks to its dynamic, context-aware embeddings.
+
+##### Conclusion
+Advanced IR methods, particularly Bert, outperform traditional methods in recipe retrieval, especially for complex queries. 
+Future work should focus on enhancing Word2Vec's performance, fine-tuning BERT with larger datasets, and evaluating more extensive retrieval sets.
+
 
 ### Project Structure
 ___
