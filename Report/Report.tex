@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx} % For including images (optional)
+\usepackage{geometry} % For adjusting page margins (optional)
+\geometry{margin=1in}
+
+\begin{document}
+
+% Start the title page environment
+\begin{titlepage}
+    \centering
+    \vspace*{1in} % Adjust vertical space to center content
+    \Huge % Title size
+    \textbf{A Comparison of Classical and Modern Information Retrieval Approaches on Recipes} \\[1.5cm] % Title
+    \LARGE % Subtitle size
+    Group Number: 22 \\[1.5cm]
+    \Large % Member names size
+    \textbf{Members:} \\
+    Markus Auer-Jammerbund \\ \textit{auer-jammerbund@student.tugraz.at} \\
+    Thomas Knoll \\ \textit{thomas.knoll@student.tugraz.at} \\
+    Jonas Pfisterer \\ \textit{jonas.pfisterer@student.tugraz.at} \\
+    Thomas Puchleitner \\ \textit{thomas.puchleitner@student.tugraz.at} \\   [1.5cm] 
+    Projectlink: TODO INSERT LINK HERE 
+
+    \includegraphics[width=0.4\textwidth]{2560px-TU_Graz.svg.png}
+    
+\end{titlepage}
+
+\section{Introduction}
+In recent years, sharing recipes on social media and other sites has become very popular, and many people have traded old, trusted cookbooks for the internet as their source for new recipes and cooking ideas.
+Many recipe-sharing platforms exist, and the number of available recipes is ever-increasing.
+While the increase in available recipes offer greater variety and possibilities, it also makes it harder to find recipes catered to one's taste, preferences, eating habits, and cooking abilities. \\
+
+Traditional information retrieval systems might be unable to handle the ever-increasing number of recipes.
+They might fail to capture specific attributes and categories without extensive preprocessing.
+Advanced information retrieval systems might be better suited to handle many recipes.
+Systems like Word2Vec and Bert can capture semantic relations between the ingredients, providing more relevant results than traditional approaches. \\
+
+This project explores the application of both traditional and advanced information retrieval methods to recipe retrieval.
+It aims to evaluate the effectiveness by performing different queries that reflect how users might search for new recipes or general cooking ideas and assess the relevance of the retrieved recipes from the traditional and advanced approaches.
+The queries differ from particular queries to retrieve specific recipes to more general queries for broader recommendations.
+The main research questions are how well both approaches perform and whether advanced information retrieval systems provide better results than the traditional simple approach and which methods are better suited for which queries.
+
+\section{Related Work}
+% ------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Used Methods}
+\subsubsection{TF-IDF (Term Frequency - Inverse Document Frequency)}
+This is the classical information retrieval method that is used here as comparison to the ones that can capture semantic meaning. The idea behind it, is to measure the importance of a word in a document $d$ compared to a corpus. This is done by measuring the \textit{term frequency} $\text{TF}(t, d)$ (the relative frequency of a term $t$ within a document $d$ ), and the \textit{inverse document frequency} $\text{IDF}(t)$ (a measure of how much information a term provides). \\
+
+\noindent \textbf{Computation} \\
+The \textit{term frequency} can be computed as
+$$
+\text{TF}(t,d)=
+\frac
+{\text{Count of term } t \text{ in document } d}
+{\text{Total number of terms in document } d},
+$$
+and the \textit{inverse document frequency} as 
+$$
+\text{IDF}(t) = 
+\log \frac
+{\text{Total number of documents}}
+{\text{Number of documents containing term } t}.
+$$
+Finally, to get a simple TF-IDF (more advanced forms exist), both values are multiplied
+$$
+\text{TF-IDF}(t,d)=\text{TF}(t,d) \cdot \text{IDF}(t).
+$$
+
+\noindent \textbf{Usage}\\
+TF-IDF is typically used in:
+\begin{itemize}
+    \item Information Retrieval, to rank documents in response to a query
+    \item Text Mining and Natural Language Processing (NLP), to perform feature extraction
+    \item and Search Engines, to prioritize pages containing terms relevant to the users query
+\end{itemize}
+In 2015, about 83\% of text-based recommender systems used TF-IDF. 
+
+
+\subsubsection{Word2Vec}
+This is a technique used in NLP. It finds a vector representation for words to capture information about the meaning of each word relative to the surrounding words. In more mathematical terms, it creates a word embedding by mapping words to a continuous vector space where similar words are closer to each other.\\
+
+\noindent \textbf{Computation}\\
+There are two main methods to get the word embeddings, \textit{Continuous Bag Of Words (CBOW)} and \textit{Skip-Gram}.\\
+\textbf{CBOW:} This approach tries to predict words based on the surrounding words. Thus, the computational objective is to maximize the probability of a target word given its context.\\
+\textbf{Skip-Gram:} This is the reverse of the \textit{CBOW} method; it tries to predict the context given a word. The same goes for the objective, which is to maximize the probability of context words given a target word.\\
+
+\noindent \textbf{Usage}\\
+Typical usages of Word2Vec are quite similar to TF-IDF. They include:
+\begin{itemize}
+    \item NLP, for text classification, sentiment analysis and entity recognition
+    \item Recommender Systems, for finding similar items
+    \item and Search and Query Expansions, to identify semantically related words for better search results
+\end{itemize}
+
+
+\subsubsection{BERT (Bidirectional Encoder Representation from Transformers)}
+BERT is a state-of-the-art transformer-based model for NLP tasks. Similar to Word2Vec, it generates embeddings of words based on the surrounding words. Unlike Word2Vec, which has static embeddings, BERT has dynamic embeddings. \\
+
+\noindent \textbf{Computation}\\
+The embeddings are computed in four stages:
+\begin{itemize}
+    \item \textbf{Input Representation:} The given input gets split into sequences of words. Those then get tokenized into smaller units. Additionally, special tokens are added. Namely, [CLS] to mark the start of a sequence and [SEP] to separate two sentences or mark the end of a sentence. 
+    \item \textbf{Bidirectional Transformer:} Unlike traditional models, BERT looks at the context from both the left and right sides of a token simultaneously to more deeply understand the meaning and context of a text. This approach is called bidirectional attention mechanism. 
+    \item \textbf{Pre-training Tasks:} BERT gets pre-trained on large corpora using \textit{Masked Language Modeling (MLM)} and \textit{Next Sentence Prediction (NSP)}. 
+    \item \textbf{Fine-Tuning:} BERT can be fine-tuned for specific tasks by adding a task-specific head on top.
+\end{itemize}
+
+\noindent \textbf{Usage}\\
+As a more advanced and modern method, BERT has a broader spectrum of use-cases. Including, but not limited to:
+\begin{itemize}
+    \item Text Classification, for sentiment analysis, spam detection, etc.
+    \item Named Entity Recognition, for extracting entities like names, dates, or locations from text
+    \item Question Answering, by understanding questions and finding relevant answers
+    \item Machine Translation and Summarization, by generating context-aware translations and summaries
+\end{itemize}
+
+
+\subsubsection{Comparison}
+The main drawback of TF-IDF is that it only takes the words themselves into account. It is completely context-unaware. On the other hand, it is pretty fast and light weight. 
+That is also the main advantage that Word2Vec has over BERT. It also has limited context awareness, which based on the surrounding words. Thus, the context awareness is heavily influenced by the window size of surrounding words that are taken into account. 
+Meanwhile, BERT is by far the most computational expensive method
+All in all, TF-IDF works best for simple tasks such as ranking in search engines or spam detection. It also needs relatively little data to work well. Moving on, Word2Vec shines on semantic tasks and clustering, for example Recommendation and similarity. While it still needs more datasets, it still works with less data then BERT. Speaking of which, for the heavy computational costs and large amount of data needed for training, BERT can handle complex tasks such as Question answering and translation.
+% ------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Experiments and Results}
+
+
+\section{Conclusion}
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+\end{document}

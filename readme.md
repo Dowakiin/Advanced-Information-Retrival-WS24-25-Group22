@@ -10,7 +10,7 @@ Members and roles of **group 22** are:
   - Report
 - Thomas Knoll
   - Design Document
-  - _Bert_ embeddings
+  - _BERT_ embeddings
   - Evaluation
   - Report
 - Jonas Pfisterer
@@ -26,34 +26,34 @@ Members and roles of **group 22** are:
 
 ##### External Datasets and Models
 The used dataset for the recipes is from [Hugging Face](https://huggingface.co): [mbien/recipe_nlg](https://huggingface.co/datasets/mbien/recipe_nlg) \
-The _Bert_ model is also from Hugging Face: [alexdseo/RecipeBERT](https://huggingface.co/alexdseo/RecipeBERT)
+The _BERT_ model is also from Hugging Face: [alexdseo/RecipeBERT](https://huggingface.co/alexdseo/RecipeBERT)
 
 ##### Additional Files
 - [Design Document](Design/AirDesignDocumentGroup22.pdf)
 - Evaluation (as [.pdf](Evaluation/Evaluation.pdf) and [.csv](Evaluation/Evaluation.csv); or online as [google doc](https://docs.google.com/spreadsheets/d/12DoSQCYWASj7j5J2dj4g4nOa0l75Q9l1k2vbwn6Z5d0/edit?usp=sharing))
-- [Report](Report_Group_22.pdf)
+- [Report](Report/Report_Group_22.pdf)
 - [Presentation Slides](AIRPresentation.pdf)
 
 ### Abstract
 ___
-This project investigates the use of traditional and advanced information retrieval (IR) methods for recipe retrieval, using TF-IDF, Word2Vec, and Bert. 
+This project investigates the use of traditional and advanced information retrieval (IR) methods for recipe retrieval, using TF-IDF, Word2Vec, and BERT. 
 With the rise of recipe-sharing platforms, finding recipes tailored to individual tastes, preferences, and cooking skills has become increasingly challenging. 
 Our goal is to evaluate how effectively these methods handle different queries of varying difficulty and assess their suitability for this search task.
 
 ##### Methods
 - TF-IDF: A lightweight, context-unaware method effective for simple queries.
 - Word2Vec: Captures semantic relationships but struggled with harder queries in this domain.
-- Bert: A transformer-based model delivering the best performance, especially for complex queries.
+- BERT: A transformer-based model delivering the best performance, especially for complex queries.
 - Dataset: A subset of the RecipeNLG dataset, consisting of 100,000 recipes, preprocessed for cosine similarity.
 - Evaluation: Queries of varying difficulty (easy, medium, hard) were tested, and results were evaluated by four independent evaluators.
 
 ##### Results
 - TF-IDF: Performed well on simple queries but struggled with complex ones due to lack of context-awareness.
 - Word2Vec: Underperformed expectations, thus further investigation into its suitability for recipe retrieval is needed.
-- Bert: Delivered the highest accuracy overall, excelling at medium and hard queries thanks to its dynamic, context-aware embeddings.
+- BERT: Delivered the highest accuracy overall, excelling at medium and hard queries thanks to its dynamic, context-aware embeddings.
 
 ##### Conclusion
-Advanced IR methods, particularly Bert, outperform traditional methods in recipe retrieval, especially for complex queries. 
+Advanced IR methods, particularly BERT, outperform traditional methods in recipe retrieval, especially for complex queries. 
 Future work should focus on enhancing Word2Vec's performance, fine-tuning BERT with larger datasets, and evaluating more extensive retrieval sets.
 
 
@@ -87,8 +87,8 @@ If they wanted to test something out with those parameters, the command would be
 
 ##### File Structure
 As mentioned above, [app.py](app.py) provides the entry point. 
-Here, during normal start up so not in prototyping mode, the commandline arguments are handled, the data loaded and the query pipeline initialised and started.
+Here, during normal start up, so not in prototyping mode, the commandline arguments are handled, the data loaded and the query pipeline initialised and started.
 Data preprocessing and loading are done in [dataset_preprocessor.py](dataset_preprocesor.py) and [dataset_loader.py](dataset_loader.py) respectively.
-The query pipeline is programmed in [query_pipeline.py](query_pipeline.py). 
-There, the given queries are run through the pipelines for _TF-IDF_, _Word2Vec_, and _Bert_ ([tfidf_processing.py](tfidf_processing.py), [word2vec_processing.py](word2vec_processing.py), and [bert_processing.py](bert_processing.py) respectively).
+The query pipeline is programmed in [query_pipeline.py](query_pipeline.py) and the queries themselves are defined in [queries.json](queries.json). 
+There, the given queries are run through the pipelines for _TF-IDF_, _Word2Vec_, and _BERT_ ([tfidf_processing.py](tfidf_processing.py), [word2vec_processing.py](word2vec_processing.py), and [bert_processing.py](bert_processing.py) respectively).
 [print_debug_cleaned_data.py](print_debug_cleaned_data.py) only contains a print function for debugging. 
