@@ -37,7 +37,7 @@ def preprocess_dataset(dataset_name="full_dataset.csv", data_dir="~/full_data", 
     return data
 
 
-def create_mini_dataset(data: pd.DataFrame, save_path, nr_rows=10_000):
+def create_mini_dataset(data: pd.DataFrame, save_path, nr_rows=100_000):
     data = data.head(nr_rows)
     data.to_csv(save_path, index=False)
 

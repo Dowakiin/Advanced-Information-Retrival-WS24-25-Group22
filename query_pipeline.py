@@ -16,8 +16,8 @@ class RecipeQueryPipeline:
         self.results_csv_path = self.config.get("results_csv_path", "./query_results.csv")
 
         self.tfidf = self.__initialize_pipeline(TfidfPipeline, self.tfidf_path)
-        self.bert = self.__initialize_pipeline(BertPipeline, self.bert_path)
         self.word2vec = self.__initialize_pipeline(Word2VecPipeline, self.word2vec_path)
+        self.bert = self.__initialize_pipeline(BertPipeline, self.bert_path)
 
     def __initialize_pipeline(self, pipeline_class, path):
         if os.path.exists(path):
@@ -58,15 +58,12 @@ class RecipeQueryPipeline:
     def __save_results(self, results):
         with open(self.results_csv_path, "w") as file:
             for difficulty in ["easy", "medium", "hard"]:
-                for method in ["tfidf", "word2vec", "word2vec improved", "bert"]:
+                for method in ["tfidf", "word2vec", "bert"]:
                     file.write(f"{method} ({difficulty})\n")
                     for result in filter(lambda r: r["difficulty"] == difficulty and r["method"] == method, results):
                         file.write(f"Query: {result['query']}\n")
                         for i, recipe in enumerate(result['results']):
-                            if method == "word2vec improved":
-                                file.write(f"{recipe}")
-                            else:
-                                file.write(f"Recipe {i + 1}: {recipe['recipe']} (Score: {recipe['score']:.4f})\n")
+                            file.write(f"Recipe {i + 1}: {recipe['recipe']} (Score: {recipe['score']:.4f})\n")
                         file.write("\n")
 
 
