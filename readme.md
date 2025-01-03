@@ -26,7 +26,7 @@ Members and roles of **group 22** are:
 
 ##### External Datasets and Models
 The used dataset for the recipes is from [Hugging Face](https://huggingface.co): [mbien/recipe_nlg](https://huggingface.co/datasets/mbien/recipe_nlg) \
-The _BERT_ model is also from Hugging Face: [alexdseo/RecipeBERT](https://huggingface.co/alexdseo/RecipeBERT)
+The _BERT_ model is also from Hugging Face: [alexdseo/RecipeBERT](https://huggingface.co/alexdseo/RecipeBERT) (will be downloaded automatically)
 
 ##### Additional Files
 - [Design Document](Design/AirDesignDocumentGroup22.pdf)
@@ -39,6 +39,8 @@ ___
 This project investigates the use of traditional and advanced information retrieval (IR) methods for recipe retrieval, using TF-IDF, Word2Vec, and BERT. 
 With the rise of recipe-sharing platforms, finding recipes tailored to individual tastes, preferences, and cooking skills has become increasingly challenging. 
 Our goal is to evaluate how effectively these methods handle different queries of varying difficulty and assess their suitability for this search task.
+
+![image](./Design/graph.png)
 
 ##### Methods
 - TF-IDF: A lightweight, context-unaware method effective for simple queries.
@@ -59,6 +61,13 @@ Future work should focus on enhancing Word2Vec's performance, fine-tuning BERT w
 
 ### Project Structure
 ___
+##### Preprocessing the Data
+The data has to be downloaded manually from [Hugging Face](https://huggingface.co). 
+Save the dataset [mbien/recipe_nlg](https://huggingface.co/datasets/mbien/recipe_nlg) in a directory "./dataset/" and name it "full_data.csv". 
+The rest will be preprocessed automatically when starting [app.py](app.py) for the first time. 
+Also, the models will be saved locally during the first run for computational efficiency. 
+
+
 ##### Starting the Program
 The program entrypoint is in [app.py](app.py). Therefore, to start the program, navigate to the root directory of this project and type the following command into the terminal:
 
@@ -88,7 +97,7 @@ If they wanted to test something out with those parameters, the command would be
 ##### File Structure
 As mentioned above, [app.py](app.py) provides the entry point. 
 Here, during normal start up, so not in prototyping mode, the commandline arguments are handled, the data loaded and the query pipeline initialised and started.
-Data preprocessing and loading are done in [dataset_preprocessor.py](dataset_preprocesor.py) and [dataset_loader.py](dataset_loader.py) respectively.
+Functions for the data preprocessing and loading are in [dataset_preprocessor.py](dataset_preprocesor.py) and [dataset_loader.py](dataset_loader.py).
 The query pipeline is programmed in [query_pipeline.py](query_pipeline.py) and the queries themselves are defined in [queries.json](queries.json). 
 There, the given queries are run through the pipelines for _TF-IDF_, _Word2Vec_, and _BERT_ ([tfidf_processing.py](tfidf_processing.py), [word2vec_processing.py](word2vec_processing.py), and [bert_processing.py](bert_processing.py) respectively).
 [print_debug_cleaned_data.py](print_debug_cleaned_data.py) only contains a print function for debugging. 
