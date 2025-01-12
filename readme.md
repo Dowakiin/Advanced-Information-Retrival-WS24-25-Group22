@@ -61,9 +61,21 @@ Future work should focus on enhancing Word2Vec's performance, fine-tuning BERT w
 
 ### Project Structure
 ___
+##### Environment setup
+The required python packages can be install with the following command:
+```bash
+pip install -r requirements.txt
+```
+
+After installing the packages execute
+```bash
+python -m spacy download en
+```
+To download the required Word2Vec library.
+
 ##### Preprocessing the Data
 The data has to be downloaded manually from [Hugging Face](https://huggingface.co). 
-Save the dataset [mbien/recipe_nlg](https://huggingface.co/datasets/mbien/recipe_nlg) in a directory "./dataset/" and name it "full_data.csv". 
+Save the dataset [mbien/recipe_nlg](https://huggingface.co/datasets/mbien/recipe_nlg) in a directory "./dataset/full_data" and name it "full_dataset.csv". 
 The rest will be preprocessed automatically when starting [app.py](app.py) for the first time. 
 Also, the models will be saved locally during the first run for computational efficiency. 
 
@@ -96,7 +108,7 @@ If they wanted to test something out with those parameters, the command would be
 
 ##### File Structure
 As mentioned above, [app.py](app.py) provides the entry point. 
-Here, during normal start up, so not in prototyping mode, the commandline arguments are handled, the data loaded and the query pipeline initialised and started.
+Here, during normal start up, so not in prototyping mode, the commandline arguments are handled, the data loaded and the query pipeline initialized and started.
 Functions for the data preprocessing and loading are in [dataset_preprocessor.py](dataset_preprocesor.py) and [dataset_loader.py](dataset_loader.py).
 The query pipeline is programmed in [query_pipeline.py](query_pipeline.py) and the queries themselves are defined in [queries.json](queries.json). 
 There, the given queries are run through the pipelines for _TF-IDF_, _Word2Vec_, and _BERT_ ([tfidf_processing.py](tfidf_processing.py), [word2vec_processing.py](word2vec_processing.py), and [bert_processing.py](bert_processing.py) respectively).
